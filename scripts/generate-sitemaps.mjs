@@ -390,8 +390,8 @@ function buildSitemap(games, forums, allPaths) {
     })
   })
 
+  // No xml-stylesheet — GSC and other crawlers must receive plain XML only.
   return `<?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet type="text/css" href="/sitemap.css"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
@@ -458,11 +458,12 @@ function buildSitemapHtml(games, forums, allPaths) {
     <p class="count">${sorted.length} indexed URLs on buywardogshacks.com</p>
     <div class="gsc">
       <strong>Google Search Console</strong>
-      <p>Paste this sitemap URL in GSC → Sitemaps → Add a new sitemap:</p>
+      <p>Submit <strong>only</strong> this URL in GSC (not <code>/sitemap</code>):</p>
       <input type="text" readonly value="${escapeHtml(gscUrl)}" aria-label="Sitemap URL for Google Search Console" onclick="this.select()" />
       <p class="links">
-        <a href="${escapeHtml(gscUrl)}">Open raw sitemap.xml</a>
-        · Crawlers use the XML file; this page is only for reading.
+        GSC field: <code>sitemap.xml</code> ·
+        <a href="${escapeHtml(gscUrl)}">Open XML</a>
+        · Includes all pages plus <code>image:image</code> entries for /media and /og assets.
       </p>
     </div>
     <table>
@@ -556,7 +557,9 @@ function main() {
   validate(games, forums, allPaths, sitemap)
 
   writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
-  writeFileSync(join(publicDir, 'sitemap.html'), buildSitemapHtml(games, forums, allPaths), 'utf8')
+  writeFileSync(join(publicDir, 'sitemap-view.html'), buildSitemapHtml(games, forums, allPaths), 'utf8')
+  const legacyHuman = join(publicDir, 'sitemap.html')
+  if (existsSync(legacyHuman)) unlinkSync(legacyHuman)
   writeFileSync(
     join(publicDir, 'robots.txt'),
     [

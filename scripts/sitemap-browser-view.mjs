@@ -15,9 +15,9 @@ export function sitemapBrowserViewPlugin(root = process.cwd()) {
       },
     ],
     [
-      '/sitemap.html',
+      '/sitemap-view.html',
       {
-        path: join(root, 'public', 'sitemap.html'),
+        path: join(root, 'public', 'sitemap-view.html'),
         type: 'text/html; charset=utf-8',
       },
     ],

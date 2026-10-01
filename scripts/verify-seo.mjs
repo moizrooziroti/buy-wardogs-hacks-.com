@@ -25,7 +25,7 @@ function pageUrl(file) {
 }
 
 /** Utility HTML in dist — not indexed, not listed in sitemap.xml */
-const UTILITY_HTML = new Set(['sitemap.html'])
+const UTILITY_HTML = new Set(['sitemap-view.html'])
 
 const files = htmlFiles(dist)
 const indexedHtmlFiles = files.filter(
@@ -272,11 +272,17 @@ for (const image of requiredImages) {
 if (!sitemap.trimStart().startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {
   fail('sitemap.xml must start with an XML declaration')
 }
-if (!sitemap.includes('<?xml-stylesheet type="text/css" href="/sitemap.css"?>')) {
-  fail('sitemap.xml must link /sitemap.css for readable browser view')
+if (sitemap.includes('xml-stylesheet')) {
+  fail('sitemap.xml must be plain XML for Google Search Console (use /sitemap-view.html for humans)')
 }
-if (!existsSync(join(dist, 'sitemap.html'))) {
-  fail('dist/sitemap.html is missing (human-readable sitemap)')
+if (/<!DOCTYPE html/i.test(sitemap)) {
+  fail('sitemap.xml must not contain HTML')
+}
+if (!existsSync(join(dist, 'sitemap-view.html'))) {
+  fail('dist/sitemap-view.html is missing (human-readable sitemap)')
+}
+if (existsSync(join(dist, 'sitemap.html'))) {
+  fail('dist/sitemap.html must not be published (conflicts with /sitemap → XML on Cloudflare)')
 }
 for (const stale of [
   'sitemap-pages.xml',
