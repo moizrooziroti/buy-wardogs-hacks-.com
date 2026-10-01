@@ -344,10 +344,8 @@ function collectAllPaths(games, forums, staticRoutes) {
   return [...paths]
 }
 
-function buildSitemap(games, forums, allPaths) {
-  const forumByPath = new Map(forums.map((f) => [`/forums/${f.slug}`, f]))
-
-  const sorted = [...allPaths].sort((a, b) => {
+function sortPaths(allPaths) {
+  return [...allPaths].sort((a, b) => {
     const rank = (path) => {
       if (path === '/') return 0
       if (path.endsWith('-cheats')) return 1
@@ -361,6 +359,20 @@ function buildSitemap(games, forums, allPaths) {
     const diff = rank(a) - rank(b)
     return diff !== 0 ? diff : a.localeCompare(b)
   })
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+}
+
+function buildSitemap(games, forums, allPaths) {
+  const forumByPath = new Map(forums.map((f) => [`/forums/${f.slug}`, f]))
+
+  const sorted = sortPaths(allPaths)
 
   const entries = sorted.map((path) => {
     const meta = PAGE_META[path] || {
@@ -379,12 +391,96 @@ function buildSitemap(games, forums, allPaths) {
   })
 
   return `<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="/sitemap.css"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
 ${entries.join('\n')}
 </urlset>
+`
+}
+
+/** Human-readable sitemap (browsers). Submit sitemap.xml to Google Search Console. */
+function buildSitemapHtml(games, forums, allPaths) {
+  const forumByPath = new Map(forums.map((f) => [`/forums/${f.slug}`, f]))
+  const sorted = sortPaths(allPaths)
+  const gscUrl = siteUrl('/sitemap.xml')
+  const rows = sorted
+    .map((path) => {
+      const meta = PAGE_META[path] || {
+        priority: path.startsWith('/forums/') ? '0.8' : '0.5',
+        changefreq: path.startsWith('/forums/') ? 'monthly' : 'weekly',
+      }
+      const forum = forumByPath.get(path)
+      const lastmod = forum?.date || TODAY
+      const url = siteUrl(path)
+      const imageCount = imagesForPath(path, games, forums).length
+      return `        <tr>
+          <td><a href="${escapeHtml(url)}">${escapeHtml(url)}</a></td>
+          <td>${escapeHtml(lastmod)}</td>
+          <td>${escapeHtml(meta.changefreq)}</td>
+          <td>${escapeHtml(meta.priority)}</td>
+          <td>${imageCount}</td>
+        </tr>`
+    })
+    .join('\n')
+
+  return `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <title>Sitemap | buywardogshacks.com</title>
+    <style>
+      :root { color-scheme: dark; font-family: system-ui,Segoe UI,Roboto,sans-serif; background:#0d1117; color:#e6edf3; }
+      body { margin:0; padding:24px 20px 48px; max-width:1100px; }
+      h1 { font-size:1.35rem; margin:0 0 8px; }
+      p, li { line-height:1.55; color:#9da7b3; }
+      .gsc { margin:20px 0 28px; padding:16px 18px; border:1px solid #30363d; border-radius:10px; background:#161b22; }
+      .gsc strong { color:#e6edf3; }
+      .gsc code, .gsc input { font-family:ui-monospace,Consolas,monospace; font-size:14px; }
+      .gsc input { width:100%; max-width:520px; margin-top:10px; padding:10px 12px; border-radius:8px; border:1px solid #30363d; background:#0d1117; color:#79c0ff; }
+      .links { margin:12px 0 0; }
+      .links a { color:#79c0ff; text-decoration:none; }
+      .links a:hover { text-decoration:underline; }
+      table { width:100%; border-collapse:collapse; font-size:14px; }
+      th, td { text-align:left; padding:10px 12px; border-bottom:1px solid #21262d; vertical-align:top; }
+      th { color:#8b949e; font-weight:600; font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+      td a { color:#79c0ff; word-break:break-all; }
+      tbody tr:hover { background:#161b22; }
+      .count { color:#8b949e; font-size:13px; margin-bottom:12px; }
+    </style>
+  </head>
+  <body>
+    <h1>XML Sitemap</h1>
+    <p class="count">${sorted.length} indexed URLs on buywardogshacks.com</p>
+    <div class="gsc">
+      <strong>Google Search Console</strong>
+      <p>Paste this sitemap URL in GSC → Sitemaps → Add a new sitemap:</p>
+      <input type="text" readonly value="${escapeHtml(gscUrl)}" aria-label="Sitemap URL for Google Search Console" onclick="this.select()" />
+      <p class="links">
+        <a href="${escapeHtml(gscUrl)}">Open raw sitemap.xml</a>
+        · Crawlers use the XML file; this page is only for reading.
+      </p>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Last modified</th>
+          <th>Change freq</th>
+          <th>Priority</th>
+          <th>Images</th>
+        </tr>
+      </thead>
+      <tbody>
+${rows}
+      </tbody>
+    </table>
+  </body>
+</html>
 `
 }
 
@@ -460,6 +556,7 @@ function main() {
   validate(games, forums, allPaths, sitemap)
 
   writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8')
+  writeFileSync(join(publicDir, 'sitemap.html'), buildSitemapHtml(games, forums, allPaths), 'utf8')
   writeFileSync(
     join(publicDir, 'robots.txt'),
     [

@@ -24,11 +24,17 @@ function pageUrl(file) {
   return `${site}/${page.slice(0, -5)}`
 }
 
+/** Utility HTML in dist — not indexed, not listed in sitemap.xml */
+const UTILITY_HTML = new Set(['sitemap.html'])
+
 const files = htmlFiles(dist)
+const indexedHtmlFiles = files.filter(
+  (file) => !UTILITY_HTML.has(relative(dist, file).replaceAll('\\', '/')),
+)
 const titles = new Map()
 const descriptions = new Map()
 
-for (const file of files) {
+for (const file of indexedHtmlFiles) {
   const html = readFileSync(file, 'utf8')
   const page = relative(dist, file).replaceAll('\\', '/')
   const h1Count = (html.match(/<h1(?:\s|>)/g) || []).length
@@ -123,7 +129,7 @@ function decodeEntities(value = '') {
     .replaceAll('&#39;', "'")
 }
 
-for (const file of files) {
+for (const file of indexedHtmlFiles) {
   const page = relative(dist, file).replaceAll('\\', '/')
   if (page === '404.html') continue
   const html = readFileSync(file, 'utf8')
@@ -206,7 +212,7 @@ if (/tarkovcheats|Tarkov|warzonecheats|Delta Product|Auron Product|Ricochet/i.te
   fail('sitemap.xml still contains legacy Tarkov/Warzone branding')
 }
 const expectedUrls = new Set(
-  files
+  indexedHtmlFiles
     .filter((file) => relative(dist, file).replaceAll('\\', '/') !== '404.html')
     .map(pageUrl),
 )
@@ -255,8 +261,11 @@ for (const image of requiredImages) {
 if (!sitemap.trimStart().startsWith('<?xml version="1.0" encoding="UTF-8"?>')) {
   fail('sitemap.xml must start with an XML declaration')
 }
-if (sitemap.includes('xml-stylesheet')) {
-  fail('sitemap.xml must not embed xml-stylesheet (Worker injects it for browsers only)')
+if (!sitemap.includes('<?xml-stylesheet type="text/css" href="/sitemap.css"?>')) {
+  fail('sitemap.xml must link /sitemap.css for readable browser view')
+}
+if (!existsSync(join(dist, 'sitemap.html'))) {
+  fail('dist/sitemap.html is missing (human-readable sitemap)')
 }
 for (const stale of [
   'sitemap-pages.xml',
@@ -344,7 +353,7 @@ if (site.includes('://www.')) {
   fail('Canonical SITE_URL must be apex (no www) — www redirects to apex')
 }
 
-for (const file of files) {
+for (const file of indexedHtmlFiles) {
   if (file.endsWith('404.html')) continue
   const html = readFileSync(file, 'utf8')
   if (/rel="canonical" href="https:\/\/www\./.test(html)) {
@@ -362,12 +371,17 @@ if (!headers.includes('Content-Type: text/html; charset=utf-8')) {
 if (!headers.includes('/sitemap.xml')) {
   fail('_headers missing /sitemap.xml Content-Type')
 }
-if (!headers.includes('text/xml; charset=utf-8')) {
-  fail('_headers missing XML charset Content-Type')
+if (
+  !headers.includes('application/xml; charset=utf-8') &&
+  !headers.includes('text/xml; charset=utf-8')
+) {
+  fail('_headers missing XML charset Content-Type for /sitemap.xml')
 }
 
 if (failures.length) {
   throw new Error(`SEO verification failed:\n- ${failures.join('\n- ')}`)
 }
 
-console.log(`SEO verification passed: ${files.length} HTML files, 13 forums, 12 reviews`)
+console.log(
+  `SEO verification passed: ${indexedHtmlFiles.length} indexed HTML files, 13 forums, 12 reviews`,
+)

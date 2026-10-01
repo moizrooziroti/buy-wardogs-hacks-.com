@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="/sitemap.css"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://buywardogshacks.com/</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/" />
@@ -43,7 +44,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/wardogs-cheats</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/wardogs-cheats" />
@@ -81,7 +82,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/forums</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/forums" />
@@ -333,7 +334,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/reviews</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/reviews" />
@@ -346,7 +347,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/faq</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/faq" />
@@ -359,7 +360,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/support</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.75</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/support" />
@@ -372,7 +373,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/privacy</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/privacy" />
@@ -385,7 +386,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/refunds</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.45</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/refunds" />
@@ -398,7 +399,7 @@
   </url>
   <url>
     <loc>https://buywardogshacks.com/terms</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.4</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://buywardogshacks.com/terms" />
