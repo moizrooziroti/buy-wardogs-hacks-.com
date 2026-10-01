@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { LogoMark } from './LogoMark'
 import { CheckoutLink } from './CheckoutLink'
-import { FORUM_LABEL, LOGO_LINK_LABEL, SITE_NAME } from '../data/site'
+import { FORUM_LABEL, LOGO_LINK_LABEL } from '../data/site'
 
 const NAV_LINKS = [
   { label: FORUM_LABEL, to: '/forums' },
@@ -36,12 +36,9 @@ export function Navbar({ onVideo: _onVideo = false }: NavbarProps) {
         <a
           href="/"
           aria-label={LOGO_LINK_LABEL}
-          className="group flex min-w-0 items-center gap-2.5 rounded-lg outline-none ring-z-soft/40 focus-visible:ring-2"
+          className="group flex min-w-0 items-center rounded-lg outline-none ring-z-soft/40 focus-visible:ring-2"
         >
           <LogoMark className={`${brandClass} shrink-0 text-z-soft`} />
-          <span className={`truncate text-sm font-semibold tracking-tight sm:text-base ${brandClass}`}>
-            {SITE_NAME}
-          </span>
         </a>
 
         <div className="hidden items-center gap-2 md:flex">

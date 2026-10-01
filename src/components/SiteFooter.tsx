@@ -35,9 +35,8 @@ export function SiteFooter({ currentPath }: SiteFooterProps) {
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-col gap-10 lg:flex-row lg:justify-between lg:gap-12">
           <div className="max-w-sm shrink-0">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <LogoMark className="text-z-soft" />
-              <span className="font-semibold text-z-ink">{SITE_NAME}</span>
             </div>
             <p className="mt-3 text-sm leading-relaxed text-white/55">
               Buy wardogs hacks for Windows PC — aimbot, silent aim, ESP, class ESP, vehicle ESP,
