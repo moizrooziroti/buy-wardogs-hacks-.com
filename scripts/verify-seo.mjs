@@ -311,6 +311,14 @@ for (const asset of [
 }
 
 const redirects = readFileSync(join(root, 'public', '_redirects'), 'utf8')
+const redirectSources = new Set()
+for (const line of redirects.split(/\r?\n/)) {
+  const t = line.trim()
+  if (!t || t.startsWith('#')) continue
+  const src = t.split(/\s+/)[0]
+  if (redirectSources.has(src)) fail(`_redirects duplicate rule for path ${src}`)
+  redirectSources.add(src)
+}
 if (!redirects.includes('/sitemap-pages.xml')) {
   fail('_redirects missing legacy sitemap -> /sitemap.xml redirects')
 }

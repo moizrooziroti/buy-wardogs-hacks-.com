@@ -26,6 +26,17 @@ function validateFile(label, filePath) {
 	if (!existsSync(filePath)) return;
 	const text = readFileSync(filePath, 'utf8');
 	const rules = countRules(text);
+	const seen = new Map();
+	for (const line of text.split(/\r?\n/)) {
+		const t = line.trim();
+		if (!t || t.startsWith('#')) continue;
+		const src = t.split(/\s+/)[0];
+		if (seen.has(src)) {
+			console.error(`✗ ${label}: duplicate rule for path ${src}`);
+			process.exit(1);
+		}
+		seen.set(src, true);
+	}
 	if (rules > MAX_RULES) {
 		console.error(`✗ ${label}: ${rules} redirect rules (max ${MAX_RULES} for Cloudflare safety)`);
 		process.exit(1);
