@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+*.log
+public/images/finals-screenshot-new-*.png
+tmp/finals-screenshots/
+tmp/
+.tmp-dayzcheats/
+.cursor/
+build-log.txt
+scripts/.wardogs-staging/
+hero-image..webp
+logo..png
+favicon-logo..png
+screenshot-*.webp

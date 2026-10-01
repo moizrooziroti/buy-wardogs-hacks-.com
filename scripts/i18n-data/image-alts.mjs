@@ -1,0 +1,42 @@
+/** Descriptive image alts — Google rejects empty or keyword-only alts. */
+export const DESCRIPTIVE_IMAGE_ALTS = {
+	hero: 'Delta Force Cheats overlay — ESP and aimbot overlay in Delta Force',
+	espWallhack: 'Wallhack outlines showing enemy operators through walls',
+	aimbotCombat: 'Soft aim assist overlay during a Delta Force match',
+	squadFight: 'Delta Force Cheats combat overlay during a team fight',
+	playerEsp: 'Player ESP boxes and distance readouts in a Delta Force match',
+	headerArt: 'Aimbot view and bone priority controls for Delta Force',
+	hacksPackage: '2D radar threat overlay for Delta Force',
+	raidFight: 'Aimbot assist during a Delta Force competitive fight',
+	battleRoyale: 'Delta Force Cheats in-session overview for Windows PC',
+	raidMap: 'ESP markers for operator loadouts and POIs in Delta Force',
+};
+
+/** Page-level image alt by pageId (EN source of truth). */
+export const PAGE_IMAGE_ALTS = {
+	home: 'Delta Force Cheats homepage agent — ESP and aimbot for Delta Force',
+	'warzone-esp': 'Delta Force ESP player boxes and distance readouts in a match',
+	'warzone-aimbot': 'Delta Force Aimbot and soft aim controls on Windows PC',
+	features: 'Delta Force Cheats features — ESP, soft aim, and radar screenshots',
+	pricing: 'Delta Force Cheats store plans for monthly and lifetime licenses',
+	setup: 'Delta Force Cheats setup guide screenshot for Windows PC',
+	updates: 'Delta Force Cheats live status after ACE and game patches',
+	faq: 'Delta Force Cheats FAQ — delivery, setup, and update answers',
+	support: 'Delta Force Cheats support page for license and setup help',
+	undetected: 'Delta Force Cheats undetected status overview for Windows PC',
+	wallhack: 'delta force wallhack visibility through walls in a match',
+	radar: 'Delta Force 2D radar overlay showing nearby threats',
+	ricochet: 'Delta Force Cheats maintenance after a ACE patch',
+	'cheats-2026': 'Delta Force Cheats product overview for Delta Force',
+	hacks: 'Delta Force Cheats product page — ESP, aimbot, and radar',
+	'cheat-download': 'Delta Force Cheats download and install delivery flow',
+	'mod-menu': 'Delta Force Cheats in-game menu controls',
+	'soft-aim': 'Delta Force soft aim FOV and smoothness settings',
+	'best-cheats': 'Delta Force Cheats overview for Delta Force on PC',
+	'aimbot-hack': 'Delta Force Aimbot hack controls and bone priority',
+	'esp-hack': 'Delta Force ESP hack boxes and operator markers',
+	'unlock-all': 'Delta Force Cheats license features overview',
+	privacy: 'Delta Force Cheats privacy policy page',
+	refund: 'Delta Force Cheats refund policy page',
+	terms: 'Delta Force Cheats terms of use page',
+};

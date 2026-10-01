@@ -1,0 +1,165 @@
+# Cloudflare Workers/Pages redirects (static files always win over these rules).
+# Host www/HTTP → HTTPS apex is handled by workers/site.js (not_found_handling serves 404.html).
+
+# Trailing-slash canonicalization
+/wardogs-cheats/   /wardogs-cheats   301
+/forums/        /forums        301
+/reviews/       /reviews       301
+/faq/           /faq           301
+/support/       /support       301
+/privacy/       /privacy       301
+/terms/         /terms         301
+/refunds/       /refunds       301
+/refund/        /refunds       301
+/refund-policy  /refunds       301
+/refund-policy/ /refunds       301
+/privacy-policy /privacy       301
+/privacy-policy/ /privacy      301
+/terms-of-use   /terms         301
+/terms-of-use/  /terms         301
+/terms-of-service /terms       301
+/terms-of-service/ /terms      301
+
+# Primary SEO keyword variants → product or home
+/wardogs-hacks     /wardogs-cheats   301
+/wardogs-hacks/    /wardogs-cheats   301
+/wardogs-hack      /wardogs-cheats   301
+/wardogs-hack/     /wardogs-cheats   301
+/wardogs-cheat     /wardogs-cheats   301
+/wardogs-cheat/    /wardogs-cheats   301
+/wardogs-standalone-cheats  /wardogs-cheats   301
+/wardogs-standalone-cheats/ /wardogs-cheats   301
+/wardogs-standalone-cheat   /wardogs-cheats   301
+/wardogs-standalone-cheat/  /wardogs-cheats   301
+/wardogs-standalone-hacks   /wardogs-cheats   301
+/wardogs-standalone-hacks/  /wardogs-cheats   301
+/wardogs-standalone-hack    /wardogs-cheats   301
+/wardogs-standalone-hack/   /wardogs-cheats   301
+/cheats-wardogs    /wardogs-cheats   301
+/cheats-wardogs/   /wardogs-cheats   301
+/hacks-wardogs     /wardogs-cheats   301
+/hacks-wardogs/    /wardogs-cheats   301
+/wardogs-aimbot    /wardogs-cheats   301
+/wardogs-aimbot/   /wardogs-cheats   301
+/wardogs-esp       /wardogs-cheats   301
+/wardogs-esp/      /wardogs-cheats   301
+/wardogs-loot-esp  /wardogs-cheats   301
+/wardogs-loot-esp/ /wardogs-cheats   301
+/wardogs-wallhack  /wardogs-cheats   301
+/wardogs-wallhack/ /wardogs-cheats   301
+/wardogs-radar     /wardogs-cheats   301
+/wardogs-radar/    /wardogs-cheats   301
+/wardogs-radar-hack  /wardogs-cheats 301
+/wardogs-radar-hack/ /wardogs-cheats 301
+/wardogs-spoofer   /wardogs-cheats   301
+/wardogs-spoofer/  /wardogs-cheats   301
+/undetected-wardogs-cheats  /wardogs-cheats   301
+/undetected-wardogs-cheats/ /wardogs-cheats   301
+/undetected-wardogs-hacks   /wardogs-cheats   301
+/undetected-wardogs-hacks/  /wardogs-cheats   301
+/battleye-wardogs-cheats    /wardogs-cheats   301
+/battleye-wardogs-cheats/   /wardogs-cheats   301
+/buy-wardogs-cheats   /   301
+/buy-wardogs-cheats/  /   301
+/buy-wardogs-hacks    /   301
+/buy-wardogs-hacks/   /   301
+/guides         /forums        301
+/guides/        /forums        301
+/features-list  /forums/features-list  301
+/setup          /forums/complete-setup 301
+/wardogs-setup     /forums/complete-setup 301
+/wardogs-cheats-setup /forums/complete-setup 301
+
+# Forum short-slug aliases
+/forums/setup         /forums/complete-setup     301
+/forums/features      /forums/features-list      301
+/forums/aimbot        /forums/aimbot-settings    301
+/forums/esp           /forums/esp-wallhack-guide 301
+/forums/wallhack      /forums/esp-wallhack-guide 301
+/forums/radar         /forums/radar-hack-guide   301
+/forums/antivirus     /forums/disable-antivirus  301
+/forums/defender      /forums/disable-antivirus  301
+/forums/windows       /forums/windows-setup      301
+/forums/stream-proof  /forums/stream-proof-setup 301
+/forums/battleye      /forums/battleye-status    301
+/forums/undetected    /forums/undetected-status  301
+/forums/loader        /forums/loader-errors      301
+/forums/survival      /forums/raid-play-guide    301
+/forums/loot-run      /forums/raid-play-guide    301
+
+# Legacy slugs → WARDOGS product
+/tarkov-cheats   /wardogs-cheats   301
+/tarkov-cheats/  /wardogs-cheats   301
+/wardogs-cheats   /wardogs-cheats   301
+/wardogs-cheats/  /wardogs-cheats   301
+/eft-cheats      /wardogs-cheats   301
+/eft-cheats/     /wardogs-cheats   301
+/escape-from-wardogs-cheats   /wardogs-cheats   301
+/escape-from-wardogs-cheats/  /wardogs-cheats   301
+/wardogs-hacks   /wardogs-cheats   301
+/wardogs-hacks/  /wardogs-cheats   301
+/eft-hacks      /wardogs-cheats   301
+/eft-hacks/     /wardogs-cheats   301
+/escape-from-wardogs-hacks  /wardogs-cheats   301
+/escape-from-wardogs-hacks/ /wardogs-cheats   301
+/wardogs-aimbot  /wardogs-cheats   301
+/wardogs-esp     /wardogs-cheats   301
+/wardogs-wallhack /wardogs-cheats  301
+/wardogs-radar   /wardogs-cheats   301
+/eft-aimbot     /wardogs-cheats   301
+/eft-esp        /wardogs-cheats   301
+/eft-wallhack   /wardogs-cheats   301
+/buy-wardogs-cheats  /   301
+/buy-wardogs-cheats/ /   301
+/buy-eft-cheats     /   301
+/buy-eft-cheats/    /   301
+
+# Legacy wardogs slugs → wardogs product (older rebrand)
+/wardogs-cheats  /wardogs-cheats   301
+/wardogs-cheats/ /wardogs-cheats   301
+/wardogs-hacks   /wardogs-cheats   301
+/wardogs-hacks/  /wardogs-cheats   301
+/wardogs-aimbot  /wardogs-cheats   301
+/wardogs-esp     /wardogs-cheats   301
+/wardogs-wallhack /wardogs-cheats  301
+/isle-cheats     /wardogs-cheats   301
+/isle-cheats/    /wardogs-cheats   301
+/wardogs-hacks   /wardogs-cheats   301
+/wardogs-hacks/  /wardogs-cheats   301
+/buy-wardogs-cheats  /   301
+/buy-wardogs-cheats/ /   301
+
+# Legacy forum slugs
+/forums/ricochet-status   /forums/battleye-status   301
+/forums/ricochet-status/  /forums/battleye-status   301
+/forums/ranked-play-guide /forums/raid-play-guide   301
+/forums/ranked-play-guide/ /forums/raid-play-guide  301
+/forums/loot-run-guide    /forums/raid-play-guide   301
+/forums/loot-run-guide/   /forums/raid-play-guide   301
+/forums/survival-guide    /forums/raid-play-guide   301
+/forums/survival-guide/   /forums/raid-play-guide   301
+
+# Legacy slugs → forums
+/articles       /forums        301
+/articles/      /forums        301
+/articles/*     /forums        301
+/blog/instructions       /forums/complete-setup#quick-checklist  301
+/blog/how-to-load        /forums/complete-setup#load-order       301
+/forums/instructions     /forums/complete-setup#quick-checklist  301
+/forums/instructions/    /forums/complete-setup#quick-checklist  301
+/forums/how-to-load      /forums/complete-setup#load-order       301
+/forums/how-to-load/     /forums/complete-setup#load-order       301
+/blog/:slug/    /forums/:slug  301
+/blog/:slug     /forums/:slug  301
+/forums/:slug/  /forums/:slug  301
+
+# Legacy / alternate sitemap URLs → single canonical sitemap
+/sitemap-pages.xml     /sitemap.xml  301
+/sitemap-products.xml  /sitemap.xml  301
+/sitemap-forums.xml    /sitemap.xml  301
+/sitemap-images.xml    /sitemap.xml  301
+/sitemap-blogs.xml     /sitemap.xml  301
+/sitemap-regions.xml   /sitemap.xml  301
+/sitemap-index.xml     /sitemap.xml  301
+/sitemap_index.xml     /sitemap.xml  301
+/sitemap.xml/          /sitemap.xml  301
