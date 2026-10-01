@@ -163,6 +163,17 @@ for (const file of indexedHtmlFiles) {
   if (!html.includes('rel="image_src"')) {
     fail(`${page}: missing link rel=image_src for thumbnail crawlers`)
   }
+  for (const match of html.matchAll(/<img[^>]+src="([^"]+)"/g)) {
+    const src = match[1]
+    if (src.startsWith('data:')) continue
+    if (!src.includes('/media/')) continue
+    if (!/\.webp(\?|$)/i.test(src)) {
+      fail(`${page}: on-page media must use WebP (${src})`)
+    }
+  }
+  if (/zadeyo\.com[^"']*"[^>]*target="_blank"/i.test(html)) {
+    fail(`${page}: checkout CTA must open in the same tab (no target="_blank")`)
+  }
 }
 for (const [name, html] of [
   ['home', home],
